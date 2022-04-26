@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Img from "../../../../Assets/images/childSupport.png";
-const Volunteer = () => {
+const Volunteer = ({ title, image }) => {
   return (
     <VolunteerContainer>
       <div className="image">
-        <img src={Img} alt="img" />
+        <img src={image} alt={title} />
       </div>
       <div className="title">
-        <h3>Support Child</h3>
+        <h3>{title}</h3>
       </div>
     </VolunteerContainer>
   );
@@ -21,6 +20,16 @@ const VolunteerContainer = styled.div`
   padding: 0rem;
   overflow: hidden;
   cursor: pointer;
+  .image {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
   .title {
     background: #ffffffcc;
     padding: 1rem 1rem;

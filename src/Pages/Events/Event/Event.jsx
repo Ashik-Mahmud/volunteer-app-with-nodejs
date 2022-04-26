@@ -33,6 +33,8 @@ const EventContainer = styled.div`
   height: 200px;
   img {
     height: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .image {
     width: 250px;

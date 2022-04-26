@@ -32,7 +32,7 @@ const VolunteersList = () => {
                   <button className="btn btn-danger">Delete</button>
                 </td>
                 <td>
-                  <span className="text-danger cursor-pointer">Disabled</span>
+                  <span className="text-danger cursor-pointer">Muted</span>
                 </td>
               </tr>
             </tbody>

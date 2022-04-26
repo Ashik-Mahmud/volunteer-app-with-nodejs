@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Loader from "../../Components/Loader/Loader";
+import NotFound from "../../Components/NotFound/NotFound";
 import useEvents from "../../Hooks/useEvents";
 import Event from "./Event/Event";
 
@@ -21,7 +22,9 @@ const Events = () => {
               <Loader />
             )
           ) : (
-            "No data found."
+            <NotFound
+              options={{ sin: "Event", pul: "Events", redirect: "/add-event" }}
+            />
           )}
         </div>
       </div>

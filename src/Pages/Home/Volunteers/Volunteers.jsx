@@ -1,16 +1,25 @@
 import React from "react";
 import styled from "styled-components";
+import Loader from "../../../Components/Loader/Loader";
+import useVolunteers from "../../../Hooks/useVolunteers";
 import Volunteer from "./Volunteer/Volunteer";
 const Volunteers = () => {
+  const { volunteers, loading } = useVolunteers();
   return (
     <div className="container">
-      <VolunteersContainer>
-        <Volunteer />
-        <Volunteer />
-        <Volunteer />
-        <Volunteer />
-        <Volunteer />
-      </VolunteersContainer>
+      {volunteers.length > 0 ? (
+        loading ? (
+          <VolunteersContainer>
+            {volunteers.map((volunteer) => (
+              <Volunteer key={volunteer._id} {...volunteer} />
+            ))}
+          </VolunteersContainer>
+        ) : (
+          <Loader />
+        )
+      ) : (
+        "No Volunteers Event Found."
+      )}
     </div>
   );
 };

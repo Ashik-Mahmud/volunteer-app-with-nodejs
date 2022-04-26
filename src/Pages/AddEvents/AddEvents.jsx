@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { auth } from "../../Firebase/Firebase.config";
 const AddEvents = () => {
+  const navigate = useNavigate();
   const [eventInput, setEventInput] = useState({
     title: "",
     date: "",
@@ -38,6 +40,7 @@ const AddEvents = () => {
       .then((res) => {
         toast.success(res.data.message);
         event.target.reset();
+        navigate("/events");
       })
       .catch((err) => {
         console.log(err);

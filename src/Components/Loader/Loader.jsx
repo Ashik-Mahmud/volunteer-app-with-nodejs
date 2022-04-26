@@ -5,6 +5,7 @@ const Loader = () => {
   return (
     <LoaderContainer>
       <img
+        width={400}
         src="https://flevix.com/wp-content/uploads/2020/01/Bounce-Bar-Preloader-1.gif"
         alt="loader"
       />

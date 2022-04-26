@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import { AppContext } from "../../App";
 import Logo from "../../Assets/logos/logo.png";
 import { auth } from "../../Firebase/Firebase.config";
 const Header = () => {
+  const [submenu, setSubmenu] = useState(false);
   const { isAuth } = useContext(AppContext);
   const navigate = useNavigate();
   const handleSignOut = async () => {
@@ -36,17 +37,34 @@ const Header = () => {
             </li>
             {isAuth ? (
               <>
-                <li>
-                  <NavLink to="/events">Events</NavLink>
+                <li className="submenu-link">
+                  <Link
+                    onClick={() => setSubmenu((prev) => !prev)}
+                    to="#"
+                    className="cursor-pointer"
+                  >
+                    Dashboard
+                  </Link>
+                  <ul className={`submenu ${submenu ? "active" : " "}`}>
+                    <li>
+                      <NavLink to="/add-event">Add Event</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/events">Manage Events</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/add-blog">Add Blog</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/manage-blogs">Manage Blogs</NavLink>
+                    </li>
+                    {auth?.currentUser?.email === "ashikmamud187@gmail.com" && (
+                      <li>
+                        <NavLink to="/volunteer-list">Volunteers</NavLink>
+                      </li>
+                    )}
+                  </ul>
                 </li>
-                <li>
-                  <NavLink to="/add-event">Add Event</NavLink>
-                </li>
-                {auth?.currentUser?.email === "ashikmamud187@gmail.com" && (
-                  <li>
-                    <NavLink to="/volunteer-list">Volunteers</NavLink>
-                  </li>
-                )}
               </>
             ) : (
               <li>
@@ -125,6 +143,41 @@ const HeaderContainer = styled.header`
         &.active {
           color: var(--primary-color);
         }
+      }
+    }
+  }
+  .submenu-link {
+    position: relative;
+    ul {
+      position: absolute;
+      background-color: var(--accent-color);
+      width: 200px;
+      padding: 1.2rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      top: 2.3rem;
+      z-index: 5;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.08);
+      border-radius: 5px;
+      transform: translateY(14px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s ease;
+      a {
+        position: relative;
+        transition: all 0.5s ease;
+      }
+      a {
+        position: relative;
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+      &.active {
+        opacity: 1;
+        transform: translateY(0px);
+        pointer-events: all;
       }
     }
   }

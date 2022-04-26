@@ -23,6 +23,7 @@ const Login = () => {
         })
         .catch((err) => console.log(err));
     }
+    navigate(from, { replace: true });
   }, [isAuth, navigate, from]);
   /* handle google sign in */
   const handleGoogleSignIn = () => {
