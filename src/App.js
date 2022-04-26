@@ -4,6 +4,8 @@ import Blogs from "./Pages/Blogs/Blogs";
 import Donations from './Pages/Donations/Donations';
 import Events from "./Pages/Events/Events";
 import Home from "./Pages/Home/Home/Home";
+import Login from './Pages/Login/Login/Login';
+import SignUp from "./Pages/Login/SignUp/SignUp";
 import Footer from "./Shared/Footer/Footer";
 import Header from "./Shared/Header/Header";
 function App() {
@@ -16,6 +18,10 @@ function App() {
           <Route path='/donations' element={<Donations />} />
           <Route path='/events' element={<Events />} />
           <Route path='/blogs' element={<Blogs />} />
+
+          {/* login  */}
+          <Route path='/login' element={<Login />} />
+          <Route path='/sign-up' element={<SignUp />} />
       </Routes>
       <Footer />
     </>
