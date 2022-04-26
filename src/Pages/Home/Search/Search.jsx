@@ -29,7 +29,7 @@ const SearchContainer = styled.div`
     display: flex;
     align-items: stretch;
     background: #ffffff;
-    border: 1px solid #ccc;
+    border: 1px solid #f8f8f8;
     border-radius: 80px;
     padding: 0.2rem;
     width: 500px;
@@ -41,10 +41,10 @@ const SearchContainer = styled.div`
       font-size: 1rem;
       font-family: var(--montserrat);
       border: none;
-      padding: 0.8rem 1rem;
+      padding: 1.1rem;
     }
     button {
-      padding: 0rem 1rem;
+      padding: 0rem 2rem;
       border-radius: 80px;
       margin: 0rem;
     }

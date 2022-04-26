@@ -2,10 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import Img from "../../../Assets/images/birdHouse.png";
 
-const Blog = () => {
+const Event = () => {
   return (
-    <BlogContainer>
-      {" "}
+    <EventContainer>
       <div className="image">
         <img src={Img} alt="img" />
       </div>
@@ -19,13 +18,15 @@ const Blog = () => {
           </p>
         </div>
         <div className="btn-group">
-          <button className="btn btn-primary-alt">See Details</button>
+          <button className="btn btn-primary">Edit</button>
+          <button className="btn btn-danger">Cancel</button>
         </div>
       </div>
-    </BlogContainer>
+    </EventContainer>
   );
 };
-const BlogContainer = styled.div`
+
+const EventContainer = styled.div`
   position: relative;
   display: flex;
   gap: 1rem;
@@ -33,20 +34,13 @@ const BlogContainer = styled.div`
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.08);
-  flex-direction: column;
-  width: 100%;
+  height: 200px;
   img {
     height: 100%;
-    width: 100%;
-    object-fit: cover;
   }
   .image {
-    height: 200px;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 10px;
+    width: 350px;
   }
-
   .desc {
     display: flex;
     flex-direction: column;
@@ -62,7 +56,8 @@ const BlogContainer = styled.div`
       text-align: center;
       width: 100%;
       display: flex;
-
+      align-items: center;
+      justify-content: flex-end;
       position: relative;
       button {
         position: relative;
@@ -70,4 +65,5 @@ const BlogContainer = styled.div`
     }
   }
 `;
-export default Blog;
+
+export default Event;

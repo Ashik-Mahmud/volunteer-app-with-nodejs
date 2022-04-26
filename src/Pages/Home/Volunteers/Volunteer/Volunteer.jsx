@@ -15,10 +15,12 @@ const Volunteer = () => {
 };
 const VolunteerContainer = styled.div`
   position: relative;
-  border: 1px solid #ccc;
+  border: 1px solid #f8f8f8;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   padding: 0rem;
   overflow: hidden;
+  cursor: pointer;
   .title {
     background: #ffffffcc;
     padding: 1rem 1rem;
