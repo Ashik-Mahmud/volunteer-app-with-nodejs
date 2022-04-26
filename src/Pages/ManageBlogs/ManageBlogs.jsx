@@ -1,53 +1,75 @@
 import React from "react";
 import styled from "styled-components";
+import Loader from "../../Components/Loader/Loader";
+import NotFound from "../../Components/NotFound/NotFound";
+import useCurrentUserBlog from "../../Hooks/useCurrentUserBlog";
 
 const ManageBlogs = () => {
+  const { currentUserBLogs, loading } = useCurrentUserBlog();
   return (
     <ManageBlogsContainer>
       <div className="container">
         <div className="manage-blog">
           <h2>Manage Blog</h2>
           <div className="table-wrapper">
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Category</th>
-                  <th>Image</th>
-                  <th width={100}>status</th>
-                  <th width={100}>Edit</th>
-                  <th width={100}>Delete</th>
-                  <th width={100}>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>3</td>
-                  <td>This is blog title</td>
-                  <td>Tech</td>
-                  <td>
-                    <img
-                      width={100}
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI7PAuPNlwu_8BAXLTXevKiuYQIl4823HY2A&usqp=CAU"
-                      alt="img"
-                    />
-                  </td>
-                  <td>
-                    <span className="colorize">Active</span>
-                  </td>
-                  <td>
-                    <button className="btn btn-primary">Edit</button>
-                  </td>
-                  <td>
-                    <button className="btn btn-danger">Delete</button>
-                  </td>
-                  <td>
-                    <span className="text-danger cursor-pointer">Disabled</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            {currentUserBLogs.length > 0 ? (
+              loading ? (
+                <table>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Image</th>
+                      <th width={100}>status</th>
+                      <th width={100}>Edit</th>
+                      <th width={100}>Delete</th>
+                      <th width={100}>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentUserBLogs.map((blog) => (
+                      <tr key={blog._id}>
+                        <td>3</td>
+                        <td>This is blog title</td>
+                        <td>Tech</td>
+                        <td>
+                          <img
+                            width={100}
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI7PAuPNlwu_8BAXLTXevKiuYQIl4823HY2A&usqp=CAU"
+                            alt="img"
+                          />
+                        </td>
+                        <td>
+                          <span className="colorize">Active</span>
+                        </td>
+                        <td>
+                          <button className="btn btn-primary">Edit</button>
+                        </td>
+                        <td>
+                          <button className="btn btn-danger">Delete</button>
+                        </td>
+                        <td>
+                          <span className="text-danger cursor-pointer">
+                            Disabled
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <Loader />
+              )
+            ) : (
+              <NotFound
+                options={{
+                  sin: "Blog",
+                  pul: "Blogs",
+                  redirect: "/add-blog",
+                }}
+              />
+            )}
           </div>
         </div>
       </div>
