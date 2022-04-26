@@ -1,38 +1,56 @@
-.App {
-  text-align: center;
+/* google fonts  */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tapestry&display=swap");
+
+/* variables  */
+:root {
+  --primary-color: #00dbae;
+  --primary-color-alt: #00acfa;
+  --secondary-color: #33333;
+  --accent-color: #fff;
+
+  --montserrat: "Montserrat", sans-serif;
+  --special-font: "Tapestry", cursive;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*,
+*::after,
+*::before {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: var(--montserrat);
+  font-size: 16px;
+}
+h1 {
+  font-family: var(--special-font);
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Custom Classes */
+.container {
+  max-width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
 }
 
-.App-link {
-  color: #61dafb;
+.colorize {
+  color: var(--primary-color);
+}
+.cursor-pointer {
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.text-danger {
+  color: #eb1391;
 }
