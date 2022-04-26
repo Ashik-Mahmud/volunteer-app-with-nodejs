@@ -1,6 +1,8 @@
+import axios from "axios";
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { auth } from "../../../Firebase/Firebase.config";
 import useFirebase from "../../../Hooks/useFirebase";
 import { FormContainer } from "./../Styles";
 const Login = () => {
@@ -10,7 +12,16 @@ const Login = () => {
   const { socialSignIn, isAuth } = useFirebase();
   useEffect(() => {
     if (isAuth) {
-      navigate(from, { replace: true });
+      /* send user info on backend for authorization */
+      axios
+        .post("http://localhost:5000/login", {
+          uid: auth?.currentUser?.uid,
+        })
+        .then((res) => {
+          navigate(from, { replace: true });
+          sessionStorage.setItem("accessToken", res.data.token);
+        })
+        .catch((err) => console.log(err));
     }
   }, [isAuth, navigate, from]);
   /* handle google sign in */

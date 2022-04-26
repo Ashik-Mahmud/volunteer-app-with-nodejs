@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import Loader from "../../Components/Loader/Loader";
+import useEvents from "../../Hooks/useEvents";
 import Event from "./Event/Event";
 
 const Events = () => {
+  const { events, loading } = useEvents();
+
   return (
     <EventsContainer>
       <div className="container">
@@ -10,12 +14,15 @@ const Events = () => {
           <h2>Events</h2>
         </div>
         <div className="events-container">
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
+          {events.length > 0 ? (
+            loading ? (
+              events.map((event) => <Event key={event._id} {...event} />)
+            ) : (
+              <Loader />
+            )
+          ) : (
+            "No data found."
+          )}
         </div>
       </div>
     </EventsContainer>

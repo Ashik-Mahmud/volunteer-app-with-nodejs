@@ -31,7 +31,10 @@ const AddEvents = () => {
       uid: auth?.currentUser?.uid,
     };
     await axios
-      .post("http://localhost:5000/events", eventData)
+      .post("http://localhost:5000/events", {
+        body: eventData,
+        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      })
       .then((res) => {
         toast.success(res.data.message);
         event.target.reset();

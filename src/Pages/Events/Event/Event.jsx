@@ -1,21 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import Img from "../../../Assets/images/birdHouse.png";
 
-const Event = () => {
+const Event = ({ title, date, description, image }) => {
   return (
     <EventContainer>
       <div className="image">
-        <img src={Img} alt="img" />
+        <img src={image} alt={title} />
       </div>
       <div className="desc">
         <div>
-          <h3>Support Child</h3>
-          <span>23 Jan, 2022</span>
-          <p>
-            please support peoples and know more about them self and make them
-            smile as well
-          </p>
+          <h3>{title}</h3>
+          <span>{date}</span>
+          <p>{description}</p>
         </div>
         <div className="btn-group">
           <button className="btn btn-primary">Edit</button>
@@ -39,7 +35,9 @@ const EventContainer = styled.div`
     height: 100%;
   }
   .image {
-    width: 350px;
+    width: 250px;
+    border-radius: 10px;
+    overflow: hidden;
   }
   .desc {
     display: flex;
