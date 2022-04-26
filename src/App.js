@@ -1,5 +1,8 @@
+import { createContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
 import './App.css';
+import useFirebase from './Hooks/useFirebase';
 import AddEvents from './Pages/AddEvents/AddEvents';
 import Blogs from "./Pages/Blogs/Blogs";
 import Donations from './Pages/Donations/Donations';
@@ -10,9 +13,15 @@ import SignUp from "./Pages/Login/SignUp/SignUp";
 import VolunteersList from './Pages/VolunteersList/VolunteersList';
 import Footer from "./Shared/Footer/Footer";
 import Header from "./Shared/Header/Header";
+export const AppContext = createContext(null);
 function App() {
+    const {user, isAuth} = useFirebase();
+    console.log(user);
+    
   return (
     <>
+    <ToastContainer />
+    <AppContext.Provider value={{isAuth}}>
       <Header />
       <Routes>
           <Route path='/' element={<Home />} />
@@ -30,6 +39,7 @@ function App() {
           <Route path='/volunteer-list' element={<VolunteersList />} />
       </Routes>
       <Footer />
+    </AppContext.Provider>
     </>
   );
 }

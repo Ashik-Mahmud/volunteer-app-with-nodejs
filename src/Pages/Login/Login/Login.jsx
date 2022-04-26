@@ -1,8 +1,16 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useFirebase from "../../../Hooks/useFirebase";
 import { FormContainer } from "./../Styles";
 const Login = () => {
   const navigate = useNavigate();
+  const { socialSignIn } = useFirebase();
+  /* handle google sign in */
+  const handleGoogleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    socialSignIn(provider);
+  };
   return (
     <FormContainer>
       <div className="form">
@@ -22,7 +30,7 @@ const Login = () => {
             <button className="btn btn-primary">Sign In</button>
           </div>
           <p className="line">Or</p>
-          <div className="social-login">
+          <div className="social-login" onClick={handleGoogleSignIn}>
             <img
               width={40}
               src="https://pennovate.co/wp-content/uploads/2022/01/Google-Logo.png"

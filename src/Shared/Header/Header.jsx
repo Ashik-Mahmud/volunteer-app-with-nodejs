@@ -1,8 +1,18 @@
-import React from "react";
+import { signOut } from "firebase/auth";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 import styled from "styled-components";
+import { AppContext } from "../../App";
 import Logo from "../../Assets/logos/logo.png";
+import { auth } from "../../Firebase/Firebase.config";
 const Header = () => {
+  const { isAuth } = useContext(AppContext);
+  const handleSignOut = async () => {
+    await signOut(auth).then(() => {
+      toast.success("Sign Out successfully done.");
+    });
+  };
   return (
     <HeaderContainer>
       <div className="container">
@@ -23,27 +33,45 @@ const Header = () => {
             <li>
               <NavLink to="/blogs">Blogs</NavLink>
             </li>
-            <li>
-              <NavLink to="/add-event">Add Event</NavLink>
-            </li>
-            <li>
-              <NavLink to="/volunteer-list">Volunteers</NavLink>
-            </li>
-            {/*  <li>
-              <NavLink to="/login" className="btn btn-primary">
-                Sign In
-              </NavLink>
-            </li> */}
+            {isAuth ? (
+              <>
+                <li>
+                  <NavLink to="/add-event">Add Event</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/volunteer-list">Volunteers</NavLink>
+                </li>
+              </>
+            ) : (
+              <li>
+                <NavLink to="/login" className="btn btn-primary">
+                  Sign In
+                </NavLink>
+              </li>
+            )}
           </ul>
-          <div className="profile">
-            <div className="avatar">
-              <span>A</span>
+          {isAuth && (
+            <div className="profile">
+              <div className="avatar">
+                <span>
+                  {auth?.currentUser?.photoURL ? (
+                    <img
+                      src={auth?.currentUser?.photoURL}
+                      alt={auth?.currentUser?.displayName}
+                    />
+                  ) : (
+                    auth?.currentUser?.displayName.slice(0, 1)
+                  )}
+                </span>
+              </div>
+              <div className="details">
+                <p>{auth?.currentUser?.displayName || "Not available"}</p>
+              </div>
+              <button onClick={handleSignOut} className="btn btn-danger">
+                Log Out
+              </button>
             </div>
-            <div className="details">
-              <p>Ashik Mahmud</p>
-            </div>
-            <button className="btn btn-danger">Log Out</button>
-          </div>
+          )}
         </nav>
       </div>
     </HeaderContainer>
@@ -71,6 +99,12 @@ const HeaderContainer = styled.header`
         font-size: 1.1rem;
         font-weight: bold;
         color: var(--primary-color);
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
     }
     ul {
