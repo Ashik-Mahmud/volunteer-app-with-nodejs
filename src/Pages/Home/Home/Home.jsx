@@ -6,7 +6,6 @@ const Home = () => {
   return (
     <HomeContainer>
       <div className="container">
-        <h1>HomeContainer</h1>
         <Search />
         <Volunteers />
       </div>
@@ -16,6 +15,7 @@ const Home = () => {
 
 const HomeContainer = styled.section`
   position: relative;
+  padding: 2rem 0rem;
 `;
 
 export default Home;
