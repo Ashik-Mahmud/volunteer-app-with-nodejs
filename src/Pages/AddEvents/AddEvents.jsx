@@ -1,13 +1,56 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
-
+import { auth } from "../../Firebase/Firebase.config";
 const AddEvents = () => {
+  const [eventInput, setEventInput] = useState({
+    title: "",
+    date: "",
+    description: "",
+    image: "",
+  });
+
+  /* handle event submit form */
+  const handleEventSubmitForm = async (event) => {
+    event.preventDefault();
+    if (!eventInput.title) return toast.error("Title Field is required.");
+    if (!eventInput.date) return toast.error("Date Field is required.");
+    if (!eventInput.description)
+      return toast.error("Description Field is required.");
+    if (!eventInput.image) return toast.error("Image Field is required.");
+    const eventData = {
+      title: eventInput.title,
+      date: eventInput.date,
+      description: eventInput.description,
+      image: eventInput.image,
+      author: {
+        name: auth?.currentUser?.displayName,
+        email: auth?.currentUser?.email,
+      },
+      uid: auth?.currentUser?.uid,
+    };
+    await axios
+      .post("http://localhost:5000/events", eventData)
+      .then((res) => {
+        toast.success(res.data.message);
+        event.target.reset();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <AddEventsContainer>
       <div className="container">
         <h3>Add Events Container</h3>
         <div className="event-wrapper">
-          <form action="" className="form-wrapper">
+          <form
+            action=""
+            className="form-wrapper"
+            onSubmit={handleEventSubmitForm}
+          >
             <div className="group">
               <div className="input-group">
                 <label htmlFor="title">Title</label>
@@ -16,11 +59,21 @@ const AddEvents = () => {
                   placeholder="Title"
                   id="title"
                   name="title"
+                  onChange={(e) =>
+                    setEventInput({ ...eventInput, title: e.target.value })
+                  }
                 />
               </div>
               <div className="input-group">
                 <label htmlFor="date">Date</label>
-                <input type="date" id="date" name="date" />
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  onChange={(e) =>
+                    setEventInput({ ...eventInput, date: e.target.value })
+                  }
+                />
               </div>
             </div>
 
@@ -32,6 +85,9 @@ const AddEvents = () => {
                 id="desc"
                 name="desc"
                 rows={3}
+                onChange={(e) =>
+                  setEventInput({ ...eventInput, description: e.target.value })
+                }
               ></textarea>
             </div>
             <div className="input-group">
@@ -41,6 +97,9 @@ const AddEvents = () => {
                 id="url"
                 name="url"
                 placeholder="Put Image Url"
+                onChange={(e) =>
+                  setEventInput({ ...eventInput, image: e.target.value })
+                }
               />
             </div>
 
