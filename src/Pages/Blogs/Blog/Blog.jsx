@@ -1,22 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import Img from "../../../Assets/images/birdHouse.png";
 
-const Blog = () => {
+const Blog = ({ title, image, description, category }) => {
   return (
     <BlogContainer>
       {" "}
       <div className="image">
-        <img src={Img} alt="img" />
+        <img src={image} alt={title} />
       </div>
       <div className="desc">
         <div>
-          <h3>Support Child</h3>
-          <span>23 Jan, 2022</span>
-          <p>
-            please support peoples and know more about them self and make them
-            smile as well
-          </p>
+          <h3>{title}</h3>
+          <div className="meta">
+            <span>23 Jan, 2022</span>
+            <span>{category}</span>
+          </div>
+          <p>{description.slice(0, 200)}</p>
         </div>
         <div className="btn-group">
           <button className="btn btn-primary-alt">See Details</button>
@@ -35,6 +34,12 @@ const BlogContainer = styled.div`
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.08);
   flex-direction: column;
   width: 100%;
+  .meta {
+    margin: 0.3rem 0rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
   img {
     height: 100%;
     width: 100%;

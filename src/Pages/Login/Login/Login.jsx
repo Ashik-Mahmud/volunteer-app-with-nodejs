@@ -18,7 +18,6 @@ const Login = () => {
           uid: auth?.currentUser?.uid,
         })
         .then((res) => {
-          navigate(from, { replace: true });
           sessionStorage.setItem("accessToken", res.data.token);
         })
         .catch((err) => console.log(err));

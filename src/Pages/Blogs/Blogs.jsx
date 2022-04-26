@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import Loader from "../../Components/Loader/Loader";
+import useBlogs from "../../Hooks/useBlogs";
 import Blog from "./Blog/Blog";
 
 const Blogs = () => {
+  const { blogs, loading } = useBlogs();
   return (
     <BlogsContainer>
       {/* <h2>Blog Not Available It's comes very soon.</h2>
@@ -17,13 +20,19 @@ const Blogs = () => {
             of your effort.
           </p>
         </div>
-        <div className="donations-container">
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-        </div>
+        {blogs.length > 0 ? (
+          loading ? (
+            <div className="donations-container">
+              {blogs.map((blog) => (
+                <Blog key={blog._id} {...blog} />
+              ))}
+            </div>
+          ) : (
+            <Loader />
+          )
+        ) : (
+          "No blog found yet."
+        )}
       </div>
     </BlogsContainer>
   );
