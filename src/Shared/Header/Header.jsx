@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { AppContext } from "../../App";
@@ -8,9 +8,11 @@ import Logo from "../../Assets/logos/logo.png";
 import { auth } from "../../Firebase/Firebase.config";
 const Header = () => {
   const { isAuth } = useContext(AppContext);
+  const navigate = useNavigate();
   const handleSignOut = async () => {
     await signOut(auth).then(() => {
       toast.success("Sign Out successfully done.");
+      navigate("/login");
     });
   };
   return (
@@ -27,14 +29,15 @@ const Header = () => {
             <li>
               <NavLink to="/donations">Donations</NavLink>
             </li>
-            <li>
-              <NavLink to="/events">Events</NavLink>
-            </li>
+
             <li>
               <NavLink to="/blogs">Blogs</NavLink>
             </li>
             {isAuth ? (
               <>
+                <li>
+                  <NavLink to="/events">Events</NavLink>
+                </li>
                 <li>
                   <NavLink to="/add-event">Add Event</NavLink>
                 </li>

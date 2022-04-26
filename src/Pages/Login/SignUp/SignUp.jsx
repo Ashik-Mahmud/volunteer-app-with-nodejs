@@ -1,9 +1,18 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import useFirebase from "../../../Hooks/useFirebase";
 import { FormContainer } from "../Styles";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  const { isAuth } = useFirebase();
+  useEffect(() => {
+    if (isAuth) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuth, navigate, from]);
   return (
     <FormContainer>
       <div className="form">

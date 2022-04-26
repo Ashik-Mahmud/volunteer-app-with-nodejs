@@ -1,11 +1,18 @@
 import { GoogleAuthProvider } from "firebase/auth";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import useFirebase from "../../../Hooks/useFirebase";
 import { FormContainer } from "./../Styles";
 const Login = () => {
   const navigate = useNavigate();
-  const { socialSignIn } = useFirebase();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  const { socialSignIn, isAuth } = useFirebase();
+  useEffect(() => {
+    if (isAuth) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuth, navigate, from]);
   /* handle google sign in */
   const handleGoogleSignIn = () => {
     const provider = new GoogleAuthProvider();

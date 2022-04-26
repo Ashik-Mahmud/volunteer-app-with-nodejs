@@ -2,6 +2,7 @@ import { createContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import './App.css';
+import RequireAuth from './Auth/RequireAuth';
 import useFirebase from './Hooks/useFirebase';
 import AddEvents from './Pages/AddEvents/AddEvents';
 import Blogs from "./Pages/Blogs/Blogs";
@@ -15,9 +16,8 @@ import Footer from "./Shared/Footer/Footer";
 import Header from "./Shared/Header/Header";
 export const AppContext = createContext(null);
 function App() {
-    const {user, isAuth} = useFirebase();
-    console.log(user);
-    
+    const { isAuth} = useFirebase();
+        
   return (
     <>
     <ToastContainer />
@@ -27,7 +27,6 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
           <Route path='/donations' element={<Donations />} />
-          <Route path='/events' element={<Events />} />
           <Route path='/blogs' element={<Blogs />} />
 
           {/* login  */}
@@ -35,8 +34,9 @@ function App() {
           <Route path='/sign-up' element={<SignUp />} />
 
           {/* require routes */}
-          <Route path='/add-event' element={<AddEvents />} />
-          <Route path='/volunteer-list' element={<VolunteersList />} />
+          <Route path='/events' element={<RequireAuth><Events /></RequireAuth>} />
+          <Route path='/add-event' element={<RequireAuth><AddEvents /></RequireAuth> } />
+          <Route path='/volunteer-list' element={<RequireAuth><VolunteersList /></RequireAuth>} />
       </Routes>
       <Footer />
     </AppContext.Provider>
