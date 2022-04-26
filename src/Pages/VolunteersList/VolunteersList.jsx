@@ -58,9 +58,12 @@ const VolunteersListContainer = styled.section`
       width: 100%;
       margin: 1rem 0rem;
       text-align: left;
+      thead {
+        background: #f8f8f8;
+      }
       td,
       th {
-        padding: 0.5rem;
+        padding: 0.7rem;
       }
     }
   }

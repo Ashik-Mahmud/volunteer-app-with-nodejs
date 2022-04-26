@@ -29,12 +29,21 @@ const Header = () => {
             <li>
               <NavLink to="/volunteer-list">Volunteers</NavLink>
             </li>
-            <li>
+            {/*  <li>
               <NavLink to="/login" className="btn btn-primary">
                 Sign In
               </NavLink>
-            </li>
+            </li> */}
           </ul>
+          <div className="profile">
+            <div className="avatar">
+              <span>A</span>
+            </div>
+            <div className="details">
+              <p>Ashik Mahmud</p>
+            </div>
+            <button className="btn btn-danger">Log Out</button>
+          </div>
         </nav>
       </div>
     </HeaderContainer>
@@ -48,6 +57,22 @@ const HeaderContainer = styled.header`
     align-items: center;
     justify-content: space-between;
     position: relative;
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      .avatar {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        border: 3px solid #ddd;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+    }
     ul {
       display: flex;
       flex-wrap: wrap;
