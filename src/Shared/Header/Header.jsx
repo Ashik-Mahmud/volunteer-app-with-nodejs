@@ -15,6 +15,7 @@ const Header = () => {
       navigate("/login");
     });
   };
+
   return (
     <HeaderContainer>
       <div className="container">
@@ -41,9 +42,11 @@ const Header = () => {
                 <li>
                   <NavLink to="/add-event">Add Event</NavLink>
                 </li>
-                <li>
-                  <NavLink to="/volunteer-list">Volunteers</NavLink>
-                </li>
+                {auth?.currentUser?.email === "ashikmamud187@gmail.com" && (
+                  <li>
+                    <NavLink to="/volunteer-list">Volunteers</NavLink>
+                  </li>
+                )}
               </>
             ) : (
               <li>
