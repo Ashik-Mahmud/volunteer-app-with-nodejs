@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Loader from "../../Components/Loader/Loader";
 import NotFound from "../../Components/NotFound/NotFound";
@@ -6,6 +7,7 @@ import useCurrentUserBlog from "../../Hooks/useCurrentUserBlog";
 
 const ManageBlogs = () => {
   const { currentUserBLogs, loading } = useCurrentUserBlog();
+  const navigate = useNavigate();
   return (
     <ManageBlogsContainer>
       <div className="container">
@@ -44,7 +46,12 @@ const ManageBlogs = () => {
                           <span className="colorize">Active</span>
                         </td>
                         <td>
-                          <button className="btn btn-primary">Edit</button>
+                          <button
+                            onClick={() => navigate(`/update-blog/${blog._id}`)}
+                            className="btn btn-primary"
+                          >
+                            Edit
+                          </button>
                         </td>
                         <td>
                           <button className="btn btn-danger">Delete</button>

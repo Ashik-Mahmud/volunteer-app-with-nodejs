@@ -14,6 +14,7 @@ import Home from "./Pages/Home/Home/Home";
 import Login from './Pages/Login/Login/Login';
 import SignUp from "./Pages/Login/SignUp/SignUp";
 import ManageBlogs from './Pages/ManageBlogs/ManageBlogs';
+import UpdateBlog from './Pages/ManageBlogs/UpdateBlog/UpdateBlog';
 import NotFound404 from './Pages/NotFound404/NotFound';
 import VolunteersList from './Pages/VolunteersList/VolunteersList';
 import Footer from "./Shared/Footer/Footer";
@@ -43,6 +44,7 @@ function App() {
           <Route path='/update-event/:updateId' element={<RequireAuth><UpdateEvent /></RequireAuth> } />
           <Route path='/volunteer-list' element={<RequireAuth><VolunteersList /></RequireAuth>} />
           <Route path='/add-blog' element={<RequireAuth><AddBlog /></RequireAuth>} />
+          <Route path='/update-blog/:blogId' element={<RequireAuth><UpdateBlog /></RequireAuth>} />
           <Route path='/manage-blogs' element={<RequireAuth><ManageBlogs /></RequireAuth>} />
 
           {/* Not found Route  */}

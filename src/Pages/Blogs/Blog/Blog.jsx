@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Blog = ({ title, image, description, category }) => {
+const Blog = ({ title, image, description, category, author }) => {
   return (
     <BlogContainer>
       {" "}
@@ -14,6 +14,7 @@ const Blog = ({ title, image, description, category }) => {
           <div className="meta">
             <span>23 Jan, 2022</span>
             <span>{category}</span>
+            <span>{author?.name}</span>
           </div>
           <p>{description.slice(0, 200)}</p>
         </div>
