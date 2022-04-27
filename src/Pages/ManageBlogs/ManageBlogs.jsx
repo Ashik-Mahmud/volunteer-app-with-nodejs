@@ -41,8 +41,10 @@ const ManageBlogs = () => {
         });
     }
   };
-
-  const pageNumber = Math.ceil(totalBlogs / limit);
+  let pageNumber;
+  if (currentUserBLogs > limit) {
+    pageNumber = Math.ceil(currentUserBLogs / limit);
+  }
 
   return (
     <ManageBlogsContainer>

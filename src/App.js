@@ -8,6 +8,7 @@ import AddBlog from './Pages/AddBlog/AddBlog';
 import AddEvents from './Pages/AddEvents/AddEvents';
 import BlogDetails from './Pages/Blogs/BlogDetails/BlogDetails';
 import Blogs from "./Pages/Blogs/Blogs";
+import Donate from './Pages/Donations/Donate/Donate';
 import Donations from './Pages/Donations/Donations';
 import Events from "./Pages/Events/Events";
 import UpdateEvent from './Pages/Events/UpdateEvent/UpdateEvent';
@@ -34,6 +35,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/donations' element={<Donations />} />
           <Route path='/blogs' element={<Blogs />} />
+          <Route path='/donate/:donateTitle' element={<Donate />} />
           <Route path='/blog-details/:blogId' element={<BlogDetails />} />
 
           {/* login  */}
