@@ -22,18 +22,18 @@ const Blogs = () => {
             of your effort.
           </p>
         </div>
-        {blogs.length > 0 ? (
-          loading ? (
+        {loading ? (
+          blogs.length > 0 ? (
             <div className="donations-container">
               {blogs.map((blog) => (
                 <Blog key={blog._id} {...blog} />
               ))}
             </div>
           ) : (
-            <Loader />
+            "No blog found yet."
           )
         ) : (
-          "No blog found yet."
+          <Loader />
         )}
       </div>
     </BlogsContainer>

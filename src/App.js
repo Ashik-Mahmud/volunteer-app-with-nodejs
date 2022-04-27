@@ -6,6 +6,7 @@ import RequireAuth from './Auth/RequireAuth';
 import useFirebase from './Hooks/useFirebase';
 import AddBlog from './Pages/AddBlog/AddBlog';
 import AddEvents from './Pages/AddEvents/AddEvents';
+import BlogDetails from './Pages/Blogs/BlogDetails/BlogDetails';
 import Blogs from "./Pages/Blogs/Blogs";
 import Donations from './Pages/Donations/Donations';
 import Events from "./Pages/Events/Events";
@@ -33,6 +34,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/donations' element={<Donations />} />
           <Route path='/blogs' element={<Blogs />} />
+          <Route path='/blog-details/:blogId' element={<BlogDetails />} />
 
           {/* login  */}
           <Route path='/login' element={<Login />} />

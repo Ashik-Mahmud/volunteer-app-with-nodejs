@@ -30,6 +30,7 @@ const AddBlog = () => {
       description: blogInput.description,
       image: blogInput.image,
       uid: auth?.currentUser?.uid,
+      createdAt: new Date().toDateString(),
       author: {
         name: auth?.currentUser?.displayName,
         email: auth?.currentUser?.email,

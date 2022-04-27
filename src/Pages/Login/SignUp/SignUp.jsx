@@ -31,6 +31,10 @@ const SignUp = () => {
             <input type="text" value={new Date().toDateString()} readOnly />
           </div>
           <div className="input-group">
+            <label htmlFor="work">Work</label>
+            <input type="text" placeholder="Work" name="work" id="work" />
+          </div>
+          <div className="input-group">
             <label htmlFor="email">Email</label>
             <input type="email" placeholder="Email" name="email" id="email" />
           </div>

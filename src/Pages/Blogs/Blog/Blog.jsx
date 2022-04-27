@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Blog = ({ title, image, description, category, author }) => {
+const Blog = ({ _id, title, image, description, category, author }) => {
+  const navigate = useNavigate();
   return (
     <BlogContainer>
       {" "}
@@ -19,7 +21,12 @@ const Blog = ({ title, image, description, category, author }) => {
           <p>{description.slice(0, 200)}</p>
         </div>
         <div className="btn-group">
-          <button className="btn btn-primary-alt">See Details</button>
+          <button
+            onClick={() => navigate(`/blog-details/${_id}`)}
+            className="btn btn-primary-alt"
+          >
+            See Details
+          </button>
         </div>
       </div>
     </BlogContainer>
