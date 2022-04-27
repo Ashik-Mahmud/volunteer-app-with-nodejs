@@ -1,7 +1,8 @@
 import axios from "axios";
-import { GoogleAuthProvider } from "firebase/auth";
-import React, { useEffect } from "react";
+import { GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { auth } from "../../../Firebase/Firebase.config";
 import useFirebase from "../../../Hooks/useFirebase";
 import useTitle from "../../../Hooks/useTitle";
@@ -31,20 +32,61 @@ const Login = () => {
     const provider = new GoogleAuthProvider();
     socialSignIn(provider);
   };
+
+  const [loginInput, setLoginInput] = useState({
+    email: "",
+    password: "",
+  });
+
+  /* Handle login form */
+  const handleLoginForm = async (event) => {
+    event.preventDefault();
+    if (!loginInput.email)
+      return toast.error("Email is required.", { position: "top-center" });
+    if (!loginInput.password)
+      return toast.error("Password is required.", { position: "top-center" });
+
+    await signInWithEmailAndPassword(
+      auth,
+      loginInput.email,
+      loginInput.password
+    )
+      .then((res) => {
+        toast.success("Sign In successfully done.");
+      })
+      .catch((err) => {
+        toast.error(err.message.split(":")[1]);
+      });
+  };
+
   return (
     <FormContainer>
       <div className="form">
         <h2>
           Sign In Into <span className="colorize">Account</span>
         </h2>
-        <form action="" className="form-wrapper">
+        <form action="" className="form-wrapper" onSubmit={handleLoginForm}>
           <div className="input-group">
             <label htmlFor="email">Email</label>
-            <input type="email" name="email" placeholder="Email" />
+            <input
+              type="email"
+              name="email"
+              onChange={(event) =>
+                setLoginInput({ ...loginInput, email: event.target.value })
+              }
+              placeholder="Email"
+            />
           </div>
           <div className="input-group">
             <label htmlFor="password">Password</label>
-            <input type="password" name="password" placeholder="Password" />
+            <input
+              type="password"
+              name="password"
+              onChange={(event) =>
+                setLoginInput({ ...loginInput, password: event.target.value })
+              }
+              placeholder="Password"
+            />
           </div>
           <div className="input-group">
             <button className="btn btn-primary">Sign In</button>
