@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Search = () => {
+const Search = ({ setSearchText, handleSearchVolunteers }) => {
   return (
     <SearchContainer>
       <h2>We try to help peoples around the world.</h2>
@@ -11,8 +11,11 @@ const Search = () => {
           id="search"
           placeholder="Search Volunteers"
           name="search"
+          onChange={(e) => setSearchText(e.target.value)}
         />
-        <button className="btn btn-primary">Search</button>
+        <button onClick={handleSearchVolunteers} className="btn btn-primary">
+          Search
+        </button>
       </div>
     </SearchContainer>
   );

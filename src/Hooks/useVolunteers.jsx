@@ -18,7 +18,7 @@ const useVolunteers = () => {
     };
     getVolunteersData();
   }, []);
-  return { volunteers, loading };
+  return { volunteers, loading, setVolunteers, setLoading };
 };
 
 export default useVolunteers;
