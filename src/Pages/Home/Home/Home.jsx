@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { auth } from "../../../Firebase/Firebase.config";
+import useTitle from "../../../Hooks/useTitle";
 import useVolunteers from "../../../Hooks/useVolunteers";
 import Volunteers from "../Volunteers/Volunteers";
 import Search from "./../Search/Search";
 const Home = () => {
+  useTitle("Home");
   const { volunteers, loading, setVolunteers, setLoading } = useVolunteers();
   const [searchText, setSearchText] = useState("");
   const handleSearchVolunteers = async () => {

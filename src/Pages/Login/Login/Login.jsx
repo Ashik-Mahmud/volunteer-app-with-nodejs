@@ -4,8 +4,10 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../../Firebase/Firebase.config";
 import useFirebase from "../../../Hooks/useFirebase";
+import useTitle from "../../../Hooks/useTitle";
 import { FormContainer } from "./../Styles";
 const Login = () => {
+  useTitle("Login");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";

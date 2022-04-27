@@ -5,9 +5,11 @@ import Loader from "../../Components/Loader/Loader";
 import NotFound from "../../Components/NotFound/NotFound";
 import { auth } from "../../Firebase/Firebase.config";
 import useEvents from "../../Hooks/useEvents";
+import useTitle from "../../Hooks/useTitle";
 import Event from "./Event/Event";
 
 const Events = () => {
+  useTitle("Events");
   const { events, loading, setEvents } = useEvents();
   const handleEventDelete = async (id) => {
     const proceed = window.confirm("Do you want to delete?");

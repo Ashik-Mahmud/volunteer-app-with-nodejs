@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { auth } from "../../Firebase/Firebase.config";
+import useTitle from "../../Hooks/useTitle";
 const AddEvents = () => {
+  useTitle("Add Events");
   const navigate = useNavigate();
   const [eventInput, setEventInput] = useState({
     title: "",

@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { auth } from "../../Firebase/Firebase.config";
+import useTitle from "../../Hooks/useTitle";
 const AddBlog = () => {
+  useTitle("Add blog");
   const navigate = useNavigate();
   const [blogInput, setBlogInput] = useState({
     title: "",

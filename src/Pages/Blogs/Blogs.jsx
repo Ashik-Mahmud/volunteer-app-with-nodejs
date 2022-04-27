@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Loader from "../../Components/Loader/Loader";
 import useBlogs from "../../Hooks/useBlogs";
+import useTitle from "../../Hooks/useTitle";
 import Blog from "./Blog/Blog";
 
 const Blogs = () => {
+  useTitle("Blogs");
   const { blogs, loading } = useBlogs();
   return (
     <BlogsContainer>

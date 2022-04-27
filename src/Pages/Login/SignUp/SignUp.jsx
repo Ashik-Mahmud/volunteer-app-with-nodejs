@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useFirebase from "../../../Hooks/useFirebase";
+import useTitle from "../../../Hooks/useTitle";
 import { FormContainer } from "../Styles";
 
 const SignUp = () => {
+  useTitle("Sign up");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";

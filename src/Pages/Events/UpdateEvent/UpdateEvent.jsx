@@ -5,7 +5,9 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import { auth } from "../../../Firebase/Firebase.config";
 import useEvents from "../../../Hooks/useEvents";
+import useTitle from "../../../Hooks/useTitle";
 const UpdateEvent = () => {
+  useTitle("Update Event");
   const { updateId } = useParams();
   const { events } = useEvents();
   const currentEvent = events.find((event) => event._id === updateId);

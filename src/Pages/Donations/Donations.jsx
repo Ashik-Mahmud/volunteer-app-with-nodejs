@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import useTitle from "../../Hooks/useTitle";
 import Donation from "./Donation/Donation";
 
 const Donations = () => {
+  useTitle("Donations");
   return (
     <DonationsContainer>
       <div className="container">

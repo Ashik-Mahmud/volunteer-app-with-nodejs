@@ -7,8 +7,10 @@ import Loader from "../../Components/Loader/Loader";
 import NotFound from "../../Components/NotFound/NotFound";
 import { auth } from "../../Firebase/Firebase.config";
 import useCurrentUserBlog from "../../Hooks/useCurrentUserBlog";
+import useTitle from "../../Hooks/useTitle";
 
 const ManageBlogs = () => {
+  useTitle("Manage Blogs");
   const { currentUserBLogs, loading, setCurrentUserBlogs } =
     useCurrentUserBlog();
   const navigate = useNavigate();

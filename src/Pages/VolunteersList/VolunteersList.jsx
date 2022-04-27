@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import useTitle from "../../Hooks/useTitle";
 
 const VolunteersList = () => {
+  useTitle("Volunteer List");
+
   return (
     <VolunteersListContainer>
       <div className="container">
