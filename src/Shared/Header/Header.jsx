@@ -89,7 +89,7 @@ const Header = () => {
                       alt={auth?.currentUser?.displayName}
                     />
                   ) : (
-                    auth?.currentUser?.displayName.slice(0, 1)
+                    auth?.currentUser?.displayName?.slice(0, 1)
                   )}
                 </span>
               </div>

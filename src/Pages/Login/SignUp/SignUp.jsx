@@ -1,5 +1,9 @@
+import axios from "axios";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { auth } from "../../../Firebase/Firebase.config";
 import useFirebase from "../../../Hooks/useFirebase";
 import useTitle from "../../../Hooks/useTitle";
 import { FormContainer } from "../Styles";
@@ -26,14 +30,53 @@ const SignUp = () => {
   });
   const handleCreateUser = async (event) => {
     event.preventDefault();
+    if (!userInput.name)
+      return toast.error("Name field is required.", { position: "top-center" });
+    if (!userInput.work)
+      return toast.error("Work field is required.", { position: "top-center" });
+    if (!userInput.email)
+      return toast.error("Email field is required.", {
+        position: "top-center",
+      });
+    if (!userInput.password)
+      return toast.error("Password field is required.", {
+        position: "top-center",
+      });
+
     const createUserData = {
       name: userInput?.name,
       createdAt: userInput?.date,
       work: userInput?.work,
       email: userInput?.email,
-      password: userInput?.password,
     };
-    console.log(createUserData);
+
+    await createUserWithEmailAndPassword(
+      auth,
+      userInput.email,
+      userInput.password
+    )
+      .then((res) => {
+        if (res) {
+          updateProfile(auth.currentUser, { displayName: userInput.name }).then(
+            (res) => {
+              axios
+                .post(`http://localhost:5000/create-user`, {
+                  ...createUserData,
+                  uid: auth?.currentUser?.uid,
+                })
+                .then((res) => {
+                  toast.success(res.data.message);
+                })
+                .catch((err) => {
+                  console.log("create user", err);
+                });
+            }
+          );
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message.split(":")[1], { position: "top-center" });
+      });
   };
 
   return (
