@@ -16,6 +16,15 @@ const SignUp = () => {
   const { isAuth } = useFirebase();
   useEffect(() => {
     if (isAuth) {
+      /* send user info on backend for authorization */
+      axios
+        .post("http://localhost:5000/login", {
+          uid: auth?.currentUser?.uid,
+        })
+        .then((res) => {
+          sessionStorage.setItem("accessToken", res.data.token);
+        })
+        .catch((err) => console.log(err));
       navigate(from, { replace: true });
     }
   }, [isAuth, navigate, from]);
