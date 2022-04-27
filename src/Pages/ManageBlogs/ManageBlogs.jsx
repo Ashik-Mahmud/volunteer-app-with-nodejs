@@ -43,8 +43,8 @@ const ManageBlogs = () => {
         <div className="manage-blog">
           <h2>Manage Blog</h2>
           <div className="table-wrapper">
-            {currentUserBLogs.length > 0 ? (
-              loading ? (
+            {loading ? (
+              currentUserBLogs.length > 0 ? (
                 <table>
                   <thead>
                     <tr>
@@ -100,16 +100,16 @@ const ManageBlogs = () => {
                   </tbody>
                 </table>
               ) : (
-                <Loader />
+                <NotFound
+                  options={{
+                    sin: "Blog",
+                    pul: "Blogs",
+                    redirect: "/add-blog",
+                  }}
+                />
               )
             ) : (
-              <NotFound
-                options={{
-                  sin: "Blog",
-                  pul: "Blogs",
-                  redirect: "/add-blog",
-                }}
-              />
+              <Loader />
             )}
           </div>
         </div>

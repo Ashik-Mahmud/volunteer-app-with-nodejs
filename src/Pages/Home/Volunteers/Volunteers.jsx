@@ -1,22 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 import Loader from "../../../Components/Loader/Loader";
+import NotFound from "../../../Components/NotFound/NotFound";
 import Volunteer from "./Volunteer/Volunteer";
 const Volunteers = ({ options: { volunteers, loading } }) => {
   return (
     <div className="container">
-      {volunteers.length > 0 ? (
-        loading ? (
+      {loading ? (
+        volunteers.length > 0 ? (
           <VolunteersContainer>
             {volunteers.map((volunteer) => (
               <Volunteer key={volunteer._id} {...volunteer} />
             ))}
           </VolunteersContainer>
         ) : (
-          <Loader />
+          <NotFound
+            options={{
+              sin: "Event",
+              pul: "Events",
+            }}
+          />
         )
       ) : (
-        "No Volunteers Event Found."
+        <Loader />
       )}
     </div>
   );

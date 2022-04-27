@@ -39,8 +39,8 @@ const Events = () => {
           <h2>Events</h2>
         </div>
         <div className="events-container">
-          {events.length > 0 ? (
-            loading ? (
+          {loading ? (
+            events.length > 0 ? (
               events.map((event) => (
                 <Event
                   handleEventDelete={handleEventDelete}
@@ -49,12 +49,16 @@ const Events = () => {
                 />
               ))
             ) : (
-              <Loader />
+              <NotFound
+                options={{
+                  sin: "Event",
+                  pul: "Events",
+                  redirect: "/add-event",
+                }}
+              />
             )
           ) : (
-            <NotFound
-              options={{ sin: "Event", pul: "Events", redirect: "/add-event" }}
-            />
+            <Loader />
           )}
         </div>
       </div>
