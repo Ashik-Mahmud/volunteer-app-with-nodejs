@@ -13,8 +13,10 @@ const ManageBlogs = () => {
   useTitle("Manage Blogs");
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(3);
-  const { currentUserBLogs, totalBlogs, loading, setCurrentUserBlogs } =
-    useCurrentUserBlog(page, limit);
+  const { currentUserBLogs, loading, setCurrentUserBlogs } = useCurrentUserBlog(
+    page,
+    limit
+  );
 
   const navigate = useNavigate();
 
