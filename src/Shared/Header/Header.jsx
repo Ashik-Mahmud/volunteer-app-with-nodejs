@@ -4,7 +4,6 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { AppContext } from "../../App";
-import Logo from "../../Assets/logos/logo.png";
 import { auth } from "../../Firebase/Firebase.config";
 const Header = () => {
   const [submenu, setSubmenu] = useState(false);
@@ -22,7 +21,13 @@ const Header = () => {
       <div className="container">
         <nav className="navbar">
           <Link className="logo" to="/">
-            <img width={200} src={Logo} alt="logo" />
+            <img
+              width={80}
+              src={
+                "https://seeklogo.com/images/N/nature-hand-logo-6B48B645B2-seeklogo.com.png"
+              }
+              alt="logo"
+            />
           </Link>
           <ul>
             <li>

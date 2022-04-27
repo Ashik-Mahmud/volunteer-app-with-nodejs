@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
@@ -11,9 +11,13 @@ import useTitle from "../../Hooks/useTitle";
 
 const ManageBlogs = () => {
   useTitle("Manage Blogs");
-  const { currentUserBLogs, loading, setCurrentUserBlogs } =
-    useCurrentUserBlog();
+  const [page, setPage] = useState(0);
+  const [limit, setLimit] = useState(3);
+  const { currentUserBLogs, totalBlogs, loading, setCurrentUserBlogs } =
+    useCurrentUserBlog(page, limit);
+
   const navigate = useNavigate();
+
   /* handle blog delete */
   const handleDeleteBlog = async (id) => {
     const proceed = window.confirm("Do you wanna delete this blog?");
@@ -37,6 +41,9 @@ const ManageBlogs = () => {
         });
     }
   };
+
+  const pageNumber = Math.ceil(totalBlogs / limit);
+
   return (
     <ManageBlogsContainer>
       <div className="container">
@@ -44,61 +51,86 @@ const ManageBlogs = () => {
           <h2>Manage Blog</h2>
           <div className="table-wrapper">
             {loading ? (
-              currentUserBLogs.length > 0 ? (
-                <table>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Title</th>
-                      <th>Category</th>
-                      <th>Image</th>
-                      <th width={100}>status</th>
-                      <th width={100}>Edit</th>
-                      <th width={100}>Delete</th>
-                      <th width={100}>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentUserBLogs.map((blog, ind) => (
-                      <tr key={blog._id}>
-                        <td>{ind + 1}</td>
-                        <td>{blog?.title}</td>
-                        <td>{blog?.category}</td>
-                        <td>
-                          <img
-                            width={100}
-                            src={blog?.image}
-                            alt={blog?.title}
-                          />
-                        </td>
-                        <td>
-                          <span className="colorize">Active</span>
-                        </td>
-                        <td>
-                          <button
-                            onClick={() => navigate(`/update-blog/${blog._id}`)}
-                            className="btn btn-primary"
-                          >
-                            Edit
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            onClick={() => handleDeleteBlog(blog._id)}
-                            className="btn btn-danger"
-                          >
-                            Delete
-                          </button>
-                        </td>
-                        <td>
-                          <span className="text-danger cursor-pointer">
-                            Disabled
-                          </span>
-                        </td>
+              currentUserBLogs?.length > 0 ? (
+                <>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Image</th>
+                        <th width={100}>status</th>
+                        <th width={100}>Edit</th>
+                        <th width={100}>Delete</th>
+                        <th width={100}>Action</th>
                       </tr>
+                    </thead>
+                    <tbody>
+                      {currentUserBLogs.map((blog, ind) => (
+                        <tr key={blog._id}>
+                          <td>{blog._id.slice(10, 15) + "..."}</td>
+                          <td>{blog?.title}</td>
+                          <td>{blog?.category}</td>
+                          <td>
+                            <img
+                              width={100}
+                              src={blog?.image}
+                              alt={blog?.title}
+                            />
+                          </td>
+                          <td>
+                            <span className="colorize">Active</span>
+                          </td>
+                          <td>
+                            <button
+                              onClick={() =>
+                                navigate(`/update-blog/${blog._id}`)
+                              }
+                              className="btn btn-primary"
+                            >
+                              Edit
+                            </button>
+                          </td>
+                          <td>
+                            <button
+                              onClick={() => handleDeleteBlog(blog._id)}
+                              className="btn btn-danger"
+                            >
+                              Delete
+                            </button>
+                          </td>
+                          <td>
+                            <span className="text-danger cursor-pointer">
+                              Disabled
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <div className="pagination">
+                    {[...Array(pageNumber).keys()].map((num) => (
+                      <button
+                        className={page === num ? "active" : ""}
+                        onClick={() => setPage(num)}
+                        key={num}
+                      >
+                        {num + 1}
+                      </button>
                     ))}
-                  </tbody>
-                </table>
+                    <select
+                      name="page"
+                      id="page"
+                      onChange={(e) => setLimit(e.target.value)}
+                    >
+                      <option value="3">3</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                    </select>
+                  </div>
+                </>
               ) : (
                 <NotFound
                   options={{
@@ -140,6 +172,25 @@ const ManageBlogsContainer = styled.section`
       img {
         border-radius: 10px;
         width: 80px;
+      }
+    }
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      justify-content: flex-end;
+      margin: 1rem 0rem;
+      button,
+      select {
+        padding: 0.4rem;
+        background-color: transparent;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        &.active {
+          background-color: var(--primary-color);
+          color: var(--accent-color);
+          border-color: var(--primary-color);
+        }
       }
     }
   }
