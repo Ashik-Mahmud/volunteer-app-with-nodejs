@@ -21,7 +21,7 @@ const useCurrentUserBlog = () => {
     };
     getCurrentUserBlogs();
   }, []);
-  return { currentUserBLogs, loading };
+  return { currentUserBLogs, loading, setCurrentUserBlogs };
 };
 
 export default useCurrentUserBlog;

@@ -1,13 +1,40 @@
+import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import Loader from "../../Components/Loader/Loader";
 import NotFound from "../../Components/NotFound/NotFound";
+import { auth } from "../../Firebase/Firebase.config";
 import useCurrentUserBlog from "../../Hooks/useCurrentUserBlog";
 
 const ManageBlogs = () => {
-  const { currentUserBLogs, loading } = useCurrentUserBlog();
+  const { currentUserBLogs, loading, setCurrentUserBlogs } =
+    useCurrentUserBlog();
   const navigate = useNavigate();
+  /* handle blog delete */
+  const handleDeleteBlog = async (id) => {
+    const proceed = window.confirm("Do you wanna delete this blog?");
+    if (proceed) {
+      await axios
+        .delete(
+          `http://localhost:5000/blog?blogId=${id}&&uid=${auth?.currentUser?.uid}`,
+          {
+            headers: {
+              authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+            },
+          }
+        )
+        .then((res) => {
+          toast.success(res.data.message);
+          const restBlogs = currentUserBLogs.filter((blog) => blog._id !== id);
+          setCurrentUserBlogs(restBlogs);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   return (
     <ManageBlogsContainer>
       <div className="container">
@@ -54,7 +81,12 @@ const ManageBlogs = () => {
                           </button>
                         </td>
                         <td>
-                          <button className="btn btn-danger">Delete</button>
+                          <button
+                            onClick={() => handleDeleteBlog(blog._id)}
+                            className="btn btn-danger"
+                          >
+                            Delete
+                          </button>
                         </td>
                         <td>
                           <span className="text-danger cursor-pointer">
