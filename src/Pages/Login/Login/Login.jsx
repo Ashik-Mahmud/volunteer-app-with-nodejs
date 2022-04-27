@@ -21,8 +21,8 @@ const Login = () => {
           sessionStorage.setItem("accessToken", res.data.token);
         })
         .catch((err) => console.log(err));
+      navigate(from, { replace: true });
     }
-    navigate(from, { replace: true });
   }, [isAuth, navigate, from]);
   /* handle google sign in */
   const handleGoogleSignIn = () => {

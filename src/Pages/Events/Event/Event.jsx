@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Event = ({ title, date, description, image }) => {
+const Event = ({ title, date, description, image, _id }) => {
+  const navigate = useNavigate();
+
   return (
     <EventContainer>
       <div className="image">
@@ -14,7 +17,12 @@ const Event = ({ title, date, description, image }) => {
           <p>{description}</p>
         </div>
         <div className="btn-group">
-          <button className="btn btn-primary">Edit</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate(`/update-event/${_id}`)}
+          >
+            Edit
+          </button>
           <button className="btn btn-danger">Cancel</button>
         </div>
       </div>

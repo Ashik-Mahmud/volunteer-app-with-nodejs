@@ -28,16 +28,16 @@ const ManageBlogs = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentUserBLogs.map((blog) => (
+                    {currentUserBLogs.map((blog, ind) => (
                       <tr key={blog._id}>
-                        <td>3</td>
-                        <td>This is blog title</td>
-                        <td>Tech</td>
+                        <td>{ind + 1}</td>
+                        <td>{blog?.title}</td>
+                        <td>{blog?.category}</td>
                         <td>
                           <img
                             width={100}
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI7PAuPNlwu_8BAXLTXevKiuYQIl4823HY2A&usqp=CAU"
-                            alt="img"
+                            src={blog?.image}
+                            alt={blog?.title}
                           />
                         </td>
                         <td>
