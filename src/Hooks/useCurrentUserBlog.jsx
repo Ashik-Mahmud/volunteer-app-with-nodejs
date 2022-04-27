@@ -10,7 +10,7 @@ const useCurrentUserBlog = (page, limit) => {
     const getCurrentUserBlogs = async () => {
       await axios
         .get(
-          `http://localhost:5000/blog?uid=${auth?.currentUser?.uid}&&page=${page}&&limit=${limit}`,
+          `https://volunteers-app-server.herokuapp.com/blog?uid=${auth?.currentUser?.uid}&&page=${page}&&limit=${limit}`,
           {
             headers: {
               authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,

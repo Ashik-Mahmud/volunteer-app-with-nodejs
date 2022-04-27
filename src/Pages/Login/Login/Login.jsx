@@ -17,7 +17,7 @@ const Login = () => {
     if (isAuth) {
       /* send user info on backend for authorization */
       axios
-        .post("http://localhost:5000/login", {
+        .post("https://volunteers-app-server.herokuapp.com/login", {
           uid: auth?.currentUser?.uid,
         })
         .then((res) => {

@@ -24,7 +24,7 @@ const ManageBlogs = () => {
     if (proceed) {
       await axios
         .delete(
-          `http://localhost:5000/blog?blogId=${id}&&uid=${auth?.currentUser?.uid}`,
+          `https://volunteers-app-server.herokuapp.com/blog?blogId=${id}&&uid=${auth?.currentUser?.uid}`,
           {
             headers: {
               authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,

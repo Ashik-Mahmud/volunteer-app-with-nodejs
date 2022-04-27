@@ -35,10 +35,13 @@ const UpdateBlog = () => {
       uid: auth?.currentUser?.uid,
     };
     await axios
-      .post(`http://localhost:5000/update-blog?blogId=${blogId}`, {
-        body: blogContent,
-        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-      })
+      .post(
+        `https://volunteers-app-server.herokuapp.com/update-blog?blogId=${blogId}`,
+        {
+          body: blogContent,
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        }
+      )
       .then((res) => {
         toast.success(res.data.message);
         navigate("/manage-blogs");

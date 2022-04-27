@@ -7,7 +7,7 @@ const useVolunteers = () => {
   useEffect(() => {
     const getVolunteersData = async () => {
       await axios
-        .get(`http://localhost:5000/volunteers`)
+        .get(`https://volunteers-app-server.herokuapp.com/volunteers`)
         .then((res) => {
           setLoading(true);
           setVolunteers(res.data);

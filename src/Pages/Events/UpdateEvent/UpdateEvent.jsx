@@ -36,10 +36,13 @@ const UpdateEvent = () => {
       uid: auth?.currentUser?.uid,
     };
     await axios
-      .put(`http://localhost:5000/events?eventId=${updateId}`, {
-        body: eventData,
-        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-      })
+      .put(
+        `https://volunteers-app-server.herokuapp.com/events?eventId=${updateId}`,
+        {
+          body: eventData,
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        }
+      )
       .then((res) => {
         toast.success(res.data.message);
         event.target.reset();

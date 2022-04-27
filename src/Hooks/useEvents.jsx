@@ -7,11 +7,14 @@ const useEvents = () => {
   useEffect(() => {
     const getEventsData = async () => {
       await axios
-        .get(`http://localhost:5000/events?uid=${auth?.currentUser?.uid}`, {
-          headers: {
-            authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          },
-        })
+        .get(
+          `https://volunteers-app-server.herokuapp.com/events?uid=${auth?.currentUser?.uid}`,
+          {
+            headers: {
+              authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+            },
+          }
+        )
         .then((res) => {
           setEvents(res.data);
           setLoading(true);

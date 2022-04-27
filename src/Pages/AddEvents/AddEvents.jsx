@@ -35,7 +35,7 @@ const AddEvents = () => {
       uid: auth?.currentUser?.uid,
     };
     await axios
-      .post("http://localhost:5000/events", {
+      .post("https://volunteers-app-server.herokuapp.com/events", {
         body: eventData,
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
       })

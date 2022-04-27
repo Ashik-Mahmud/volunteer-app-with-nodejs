@@ -37,7 +37,7 @@ const AddBlog = () => {
       },
     };
     await axios
-      .post(`http://localhost:5000/blog`, {
+      .post(`https://volunteers-app-server.herokuapp.com/blog`, {
         body: blogContent,
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
       })

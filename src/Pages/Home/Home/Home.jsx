@@ -15,7 +15,7 @@ const Home = () => {
     if (!searchText) return toast.error(`Search Field is required.`);
     await axios
       .get(
-        `http://localhost:5000/volunteers/search?name=${searchText}&&uid=${auth?.currentUser?.uid}`,
+        `https://volunteers-app-server.herokuapp.com/volunteers/search?name=${searchText}&&uid=${auth?.currentUser?.uid}`,
         {
           headers: {
             authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,

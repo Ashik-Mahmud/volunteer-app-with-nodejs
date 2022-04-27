@@ -8,11 +8,14 @@ const useUsers = () => {
   useEffect(() => {
     (async () => {
       await axios
-        .get(`http://localhost:5000/users?uid=${auth?.currentUser?.uid}`, {
-          headers: {
-            authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          },
-        })
+        .get(
+          `https://volunteers-app-server.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
+          {
+            headers: {
+              authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+            },
+          }
+        )
         .then((res) => {
           setLoading(true);
           setUsers(res.data);
