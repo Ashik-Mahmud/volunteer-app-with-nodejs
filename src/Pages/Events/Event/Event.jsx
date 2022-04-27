@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Event = ({ title, date, description, image, _id }) => {
+const Event = ({ handleEventDelete, title, date, description, image, _id }) => {
   const navigate = useNavigate();
 
   return (
@@ -23,7 +23,12 @@ const Event = ({ title, date, description, image, _id }) => {
           >
             Edit
           </button>
-          <button className="btn btn-danger">Cancel</button>
+          <button
+            onClick={() => handleEventDelete(_id)}
+            className="btn btn-danger"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </EventContainer>

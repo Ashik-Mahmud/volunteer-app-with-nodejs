@@ -1,13 +1,35 @@
+import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import Loader from "../../Components/Loader/Loader";
 import NotFound from "../../Components/NotFound/NotFound";
+import { auth } from "../../Firebase/Firebase.config";
 import useEvents from "../../Hooks/useEvents";
 import Event from "./Event/Event";
 
 const Events = () => {
-  const { events, loading } = useEvents();
-
+  const { events, loading, setEvents } = useEvents();
+  const handleEventDelete = async (id) => {
+    const proceed = window.confirm("Do you want to delete?");
+    if (proceed) {
+      await axios
+        .delete(
+          `http://localhost:5000/event?eventId=${id}&&uid=${auth?.currentUser?.uid}`,
+          {
+            headers: {
+              authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+            },
+          }
+        )
+        .then((res) => {
+          const restEvents = events.filter((event) => event._id !== id);
+          setEvents(restEvents);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   return (
     <EventsContainer>
       <div className="container">
@@ -17,7 +39,13 @@ const Events = () => {
         <div className="events-container">
           {events.length > 0 ? (
             loading ? (
-              events.map((event) => <Event key={event._id} {...event} />)
+              events.map((event) => (
+                <Event
+                  handleEventDelete={handleEventDelete}
+                  key={event._id}
+                  {...event}
+                />
+              ))
             ) : (
               <Loader />
             )
