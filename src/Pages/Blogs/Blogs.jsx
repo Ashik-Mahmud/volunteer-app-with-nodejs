@@ -8,12 +8,9 @@ import Blog from "./Blog/Blog";
 const Blogs = () => {
   useTitle("Blogs");
   const { blogs, loading } = useBlogs();
+
   return (
     <BlogsContainer>
-      {/* <h2>Blog Not Available It's comes very soon.</h2>
-      <button title="Disabled Button" className="btn btn-primary-alt" disabled>
-        Create Your Own Blog
-      </button> */}
       <div className="container">
         <div className="title">
           <h2>Read Blogs And Gether your knowledge</h2>
@@ -40,14 +37,6 @@ const Blogs = () => {
   );
 };
 const BlogsContainer = styled.section`
-  /* position: relative;
-  text-align: center;
-  padding: 5rem 0rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center; */
   position: relative;
   padding: 3rem 0rem;
   .title {

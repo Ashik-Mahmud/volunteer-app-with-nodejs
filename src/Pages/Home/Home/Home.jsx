@@ -30,6 +30,7 @@ const Home = () => {
         console.log(err);
       });
   };
+
   return (
     <HomeContainer>
       <div className="container">

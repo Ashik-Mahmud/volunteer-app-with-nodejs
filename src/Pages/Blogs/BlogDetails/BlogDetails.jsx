@@ -1,43 +1,50 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import Loader from "../../../Components/Loader/Loader";
 import useBlogs from "../../../Hooks/useBlogs";
+import useTitle from "../../../Hooks/useTitle";
 
 const BlogDetails = () => {
   const navigate = useNavigate();
-  const { blogs } = useBlogs();
+  const { blogs, loading } = useBlogs();
   const { blogId } = useParams();
   const currentBlog = blogs.find((blog) => blog._id === blogId);
+  useTitle(currentBlog?.title || "loading");
 
   return (
     <BlogDetailsContainer>
       <div className="container">
-        <div className="card">
-          <div className="card-header">
-            <button onClick={() => navigate(-1)}>
-              <img
-                width={35}
-                src="https://icons-for-free.com/download-icon-arrows+double+arrow+doublechevronleft+left+icon-1320185729725994033_256.png"
-                alt="back"
-              />{" "}
-              Back
-            </button>
-          </div>
-          <div className="card-image">
-            <img src={currentBlog?.image} alt={currentBlog?.title} />
-          </div>
-          <div className="card-body">
-            <h2>{currentBlog?.title} </h2>
-            <ul className="meta">
-              <li>{currentBlog?.createdAt} </li>
-              <li>{currentBlog?.category}</li>
-              <li>{currentBlog?.author?.name}</li>
-            </ul>
-            <div className="desc">
-              <p>{currentBlog?.description}</p>
+        {loading ? (
+          <div className="card">
+            <div className="card-header">
+              <button onClick={() => navigate(-1)}>
+                <img
+                  width={35}
+                  src="https://icons-for-free.com/download-icon-arrows+double+arrow+doublechevronleft+left+icon-1320185729725994033_256.png"
+                  alt="back"
+                />{" "}
+                Back
+              </button>
+            </div>
+            <div className="card-image">
+              <img src={currentBlog?.image} alt={currentBlog?.title} />
+            </div>
+            <div className="card-body">
+              <h2>{currentBlog?.title} </h2>
+              <ul className="meta">
+                <li>{currentBlog?.createdAt} </li>
+                <li>{currentBlog?.category}</li>
+                <li>{currentBlog?.author?.name}</li>
+              </ul>
+              <div className="desc">
+                <p>{currentBlog?.description}</p>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <Loader />
+        )}
       </div>
     </BlogDetailsContainer>
   );

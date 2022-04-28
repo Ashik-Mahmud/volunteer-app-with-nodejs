@@ -1,9 +1,19 @@
+import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Blog = ({ _id, title, image, description, category, author }) => {
+const Blog = ({ _id, views, title, image, description, category, author }) => {
   const navigate = useNavigate();
+  /* Handle Increase Views  */
+  const handleIncreaseView = async (id) => {
+    await axios
+      .patch(`https://volunteers-app-server.herokuapp.com/views?id=${id}`)
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <BlogContainer>
       {" "}
@@ -20,13 +30,24 @@ const Blog = ({ _id, title, image, description, category, author }) => {
           </div>
           <p>{description.slice(0, 200)}</p>
         </div>
-        <div className="btn-group">
+        <div className="btn-group group">
           <button
-            onClick={() => navigate(`/blog-details/${_id}`)}
+            onClick={() => {
+              navigate(`/blog-details/${_id}`);
+              handleIncreaseView(_id);
+            }}
             className="btn btn-primary-alt"
           >
             See Details
           </button>
+          <div>
+            <img
+              src="https://www.freeiconspng.com/thumbs/click-png/mouse-cursor-click-png-outline-2.png"
+              alt="click"
+              width={25}
+            />{" "}
+            <span>{views || 0}</span>
+          </div>
         </div>
       </div>
     </BlogContainer>
@@ -48,18 +69,20 @@ const BlogContainer = styled.div`
     align-items: center;
     gap: 1rem;
   }
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+  object-fit: cover;
   }
   .image {
     height: 200px;
     width: 100%;
     overflow: hidden;
     border-radius: 10px;
+    img {
+    height: 100%;
+    width: 100%;
+    
   }
 
+ 
   .desc {
     display: flex;
     flex-direction: column;
@@ -75,6 +98,8 @@ const BlogContainer = styled.div`
       text-align: center;
       width: 100%;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
 
       position: relative;
       button {

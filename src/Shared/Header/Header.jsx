@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
@@ -16,9 +16,18 @@ const Header = () => {
       navigate("/login");
     });
   };
+  const [scroll, setScroll] = useState(0);
+  const scrollRunning = (event) => {
+    setScroll(event.path[1].scrollY);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", scrollRunning);
+
+    return () => window.removeEventListener("scroll", scrollRunning);
+  }, []);
 
   return (
-    <HeaderContainer>
+    <HeaderContainer className={scroll > 120 ? "active" : " "}>
       <div className="container">
         <nav className="navbar">
           <Link className="logo" to="/">
@@ -118,6 +127,14 @@ const Header = () => {
 const HeaderContainer = styled.header`
   position: relative;
   padding: 1rem 0rem;
+  transition: all 0.5s ease;
+  &.active {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: #fff;
+    box-shadow: 0px 0px 4px #00000014;
+  }
   .navbar {
     display: flex;
     align-items: center;

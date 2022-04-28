@@ -32,3 +32,16 @@ button[disabled] {
 input[readonly] {
   background-color: #f8f8f8;
 }
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  position: relative;
+}
+.btn-group div {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
