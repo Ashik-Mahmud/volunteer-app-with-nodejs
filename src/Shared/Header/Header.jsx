@@ -7,6 +7,7 @@ import { AppContext } from "../../App";
 import { auth } from "../../Firebase/Firebase.config";
 const Header = () => {
   const [submenu, setSubmenu] = useState(false);
+  const [menu, setMenu] = useState(false);
   const { isAuth } = useContext(AppContext);
   const navigate = useNavigate();
   const handleSignOut = async () => {
@@ -29,7 +30,7 @@ const Header = () => {
               alt="logo"
             />
           </Link>
-          <ul>
+          <ul className={menu ? "active" : " "}>
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -79,6 +80,14 @@ const Header = () => {
               </li>
             )}
           </ul>
+          <div
+            className={`menu-bar ${menu ? "active" : " "}`}
+            onClick={() => setMenu((prev) => !prev)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           {isAuth && (
             <div className="profile">
               <div className="avatar">
@@ -114,6 +123,47 @@ const HeaderContainer = styled.header`
     align-items: center;
     justify-content: space-between;
     position: relative;
+    .menu-bar {
+      position: relative;
+      cursor: pointer;
+      display: none;
+      @media (max-width: 900px) {
+        display: block;
+      }
+      span {
+        display: block;
+        width: 30px;
+        height: 2px;
+        background-color: #333;
+        margin-bottom: 0.5rem;
+        transition: all 0.5s ease;
+        position: relative;
+        &:first-child {
+          width: 24px;
+        }
+        &:last-child {
+          width: 24px;
+        }
+      }
+      &.active {
+        span {
+          width: 30px;
+          &:first-child {
+            transform: rotate(-45deg);
+            left: -1px;
+            top: 10px;
+          }
+          &:last-child {
+            transform: rotate(45deg);
+            left: -1px;
+            top: -8px;
+          }
+          &:nth-child(2) {
+            transform: scale(0);
+          }
+        }
+      }
+    }
     .profile {
       display: flex;
       align-items: center;
@@ -142,6 +192,30 @@ const HeaderContainer = styled.header`
       align-items: center;
       gap: 2rem;
       position: relative;
+      @media (max-width: 900px) {
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        left: 0%;
+        top: 100%;
+        z-index: 3;
+        width: 100%;
+        padding: 2rem;
+        height: auto;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        gap: 1rem;
+        align-items: flex-start;
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        transition: all 0.5s ease;
+        &.active {
+          opacity: 1;
+          transform: translateY(0px);
+          pointer-events: all;
+        }
+      }
       a {
         font-size: 1.1rem;
         color: var(--secondary-color);
