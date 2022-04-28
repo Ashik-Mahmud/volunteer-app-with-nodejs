@@ -167,15 +167,22 @@ const DonateContainer = styled.section`
   position: relative;
   padding: 1rem;
   margin: 1rem;
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
   .form {
     background: var(--accent-color);
     padding: 2rem;
     margin: 1rem 0rem;
+
     .group {
       display: flex;
       align-items: center;
       gap: 1rem;
       position: relative;
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
     }
     .input-group {
       display: flex;

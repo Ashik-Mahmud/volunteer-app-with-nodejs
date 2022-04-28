@@ -162,6 +162,9 @@ const ManageBlogsContainer = styled.section`
     position: relative;
     background: var(--accent-color);
     padding: 2rem;
+    @media (max-width: 768px) {
+      overflow: auto;
+    }
     table {
       width: 100%;
       text-align: left;

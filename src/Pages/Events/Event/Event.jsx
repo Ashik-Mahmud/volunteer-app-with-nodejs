@@ -43,7 +43,10 @@ const EventContainer = styled.div`
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.08);
-  height: 200px;
+  height: auto;
+  @media (max-width: 568px) {
+    flex-direction: column;
+  }
   img {
     height: 100%;
     height: 100%;
@@ -53,6 +56,12 @@ const EventContainer = styled.div`
     width: 250px;
     border-radius: 10px;
     overflow: hidden;
+    @media (max-width: 568px) {
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
   }
   .desc {
     display: flex;

@@ -12,6 +12,10 @@ const FormContainer = styled.section`
         box-shadow: 0px 0px 5px rgba(0,0,0,0.08);
         border-radius: 5px;
         border: 1px solid #ddd;
+        @media (max-width: 768px) {
+            width: 100%;
+            margin: 0rem 1rem;
+        }
         .form-wrapper{
             margin: 1rem 0rem;
             .input-group{

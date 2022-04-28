@@ -145,6 +145,9 @@ const AddEventsContainer = styled.section`
   position: relative;
   margin: 1rem 0rem;
   padding: 3rem;
+  @media (max-width: 768px) {
+    padding: 0rem;
+  }
   h3 {
     margin: 1rem 0rem;
     font-size: 1.5rem;
@@ -154,6 +157,9 @@ const AddEventsContainer = styled.section`
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.08);
     padding: 3rem;
     background: var(--accent-color);
+    @media (max-width: 768px) {
+      padding: 2rem;
+    }
   }
   .form-wrapper {
     margin: 1rem 0rem;
@@ -164,6 +170,9 @@ const AddEventsContainer = styled.section`
       justify-content: space-between;
       position: relative;
       gap: 1rem;
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
     }
     .input-group {
       display: flex;

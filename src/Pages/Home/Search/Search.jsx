@@ -37,6 +37,9 @@ const SearchContainer = styled.div`
     padding: 0.2rem;
     width: 500px;
     margin: 1.5rem auto;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
     input {
       width: 100%;
       background-color: transparent;
