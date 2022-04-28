@@ -63,6 +63,9 @@ const FormContainer = styled.section`
                 padding: 0rem;
                 border-radius: 50px;
                 cursor: pointer;
+                @media (max-width: 768px) {
+                    gap: 2rem;
+                }
             }
             p{
                 margin: 1rem 0rem;
