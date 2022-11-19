@@ -37,7 +37,7 @@ const AddBlog = () => {
       },
     };
     await axios
-      .post(`https://volunteers-app-server.herokuapp.com/blog`, {
+      .post(`https://volunteer-app-v1.onrender.com/blog`, {
         body: blogContent,
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
       })

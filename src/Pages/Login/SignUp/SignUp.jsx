@@ -18,7 +18,7 @@ const SignUp = () => {
     if (isAuth) {
       /* send user info on backend for authorization */
       axios
-        .post("https://volunteers-app-server.herokuapp.com/login", {
+        .post("https://volunteer-app-v1.onrender.com/login", {
           uid: auth?.currentUser?.uid,
         })
         .then((res) => {
@@ -69,13 +69,10 @@ const SignUp = () => {
           updateProfile(auth.currentUser, { displayName: userInput.name }).then(
             (res) => {
               axios
-                .post(
-                  `https://volunteers-app-server.herokuapp.com/create-user`,
-                  {
-                    ...createUserData,
-                    uid: auth?.currentUser?.uid,
-                  }
-                )
+                .post(`https://volunteer-app-v1.onrender.com/create-user`, {
+                  ...createUserData,
+                  uid: auth?.currentUser?.uid,
+                })
                 .then((res) => {
                   toast.success(res.data.message);
                 })

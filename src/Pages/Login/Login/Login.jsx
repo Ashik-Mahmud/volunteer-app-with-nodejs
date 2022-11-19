@@ -17,7 +17,7 @@ const Login = () => {
     if (isAuth) {
       /* send user info on backend for authorization */
       axios
-        .post("https://volunteers-app-server.herokuapp.com/login", {
+        .post("https://volunteer-app-v1.onrender.com/login", {
           uid: auth?.currentUser?.uid,
         })
         .then((res) => {

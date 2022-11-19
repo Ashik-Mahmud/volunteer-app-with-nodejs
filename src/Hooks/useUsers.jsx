@@ -9,7 +9,7 @@ const useUsers = () => {
     (async () => {
       await axios
         .get(
-          `https://volunteers-app-server.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
+          `https://volunteer-app-v1.onrender.com/users?uid=${auth?.currentUser?.uid}`,
           {
             headers: {
               authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,

@@ -17,7 +17,7 @@ const VolunteersList = () => {
     if (proceed) {
       await axios
         .delete(
-          `https://volunteers-app-server.herokuapp.com/user?id=${id}&&uid=${auth?.currentUser?.uid}`,
+          `https://volunteer-app-v1.onrender.com/user?id=${id}&&uid=${auth?.currentUser?.uid}`,
           {
             headers: {
               authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,

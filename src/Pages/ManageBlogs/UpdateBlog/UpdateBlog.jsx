@@ -36,7 +36,7 @@ const UpdateBlog = () => {
     };
     await axios
       .post(
-        `https://volunteers-app-server.herokuapp.com/update-blog?blogId=${blogId}`,
+        `https://volunteer-app-v1.onrender.com/update-blog?blogId=${blogId}`,
         {
           body: blogContent,
           authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,

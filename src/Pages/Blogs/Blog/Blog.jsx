@@ -8,7 +8,7 @@ const Blog = ({ _id, views, title, image, description, category, author }) => {
   /* Handle Increase Views  */
   const handleIncreaseView = async (id) => {
     await axios
-      .patch(`https://volunteers-app-server.herokuapp.com/views?id=${id}`)
+      .patch(`https://volunteer-app-v1.onrender.com/views?id=${id}`)
       .then((res) => {})
       .catch((err) => {
         console.log(err.message);

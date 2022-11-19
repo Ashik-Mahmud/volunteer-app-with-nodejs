@@ -6,7 +6,7 @@ const useBlogs = () => {
   useEffect(() => {
     const getBlogs = async () => {
       await axios
-        .get(`https://volunteers-app-server.herokuapp.com/blogs`)
+        .get(`https://volunteer-app-v1.onrender.com/blogs`)
         .then((res) => {
           setBlogs(res.data);
           setLoading(true);

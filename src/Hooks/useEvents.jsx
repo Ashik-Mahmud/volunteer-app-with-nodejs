@@ -8,7 +8,7 @@ const useEvents = () => {
     const getEventsData = async () => {
       await axios
         .get(
-          `https://volunteers-app-server.herokuapp.com/events?uid=${auth?.currentUser?.uid}`,
+          `https://volunteer-app-v1.onrender.com/events?uid=${auth?.currentUser?.uid}`,
           {
             headers: {
               authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,

@@ -16,7 +16,7 @@ const Events = () => {
     if (proceed) {
       await axios
         .delete(
-          `https://volunteers-app-server.herokuapp.com/event?eventId=${id}&&uid=${auth?.currentUser?.uid}`,
+          `https://volunteer-app-v1.onrender.com/event?eventId=${id}&&uid=${auth?.currentUser?.uid}`,
           {
             headers: {
               authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
